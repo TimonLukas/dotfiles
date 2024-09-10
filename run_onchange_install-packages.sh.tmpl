@@ -1,0 +1,16 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+{{ if eq .chezmoi.osRelease.id "fedora" -}}
+# Distribution: Fedora {{ .chezmoi.osRelease.version }}
+{{ if (lstat "/run/ostree-booted") -}}
+# Variant: atomic
+rpm-ostree install --idempotent --allow-inactive {{ .packages.linux.fedora.dnf | join " " -}}
+{{ else -}}
+# Variant: normal (not atomic)
+sudo dnf install {{ .packages.linux.fedora.dnf | join " " -}}
+{{ end -}}
+
+{{ end -}}
+
+{{ end -}}

@@ -1,0 +1,6 @@
+packages:
+  linux:
+    fedora:
+      dnf:
+        - 'zsh'
+        - 'zsh-autosuggestions'

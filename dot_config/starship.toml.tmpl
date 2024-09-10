@@ -1,0 +1,45 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+format = "$username$os$container$hostname$all"
+command_timeout = 1000
+
+[username]
+disabled = false
+show_always = true
+format = '[$user]($style) '
+
+[hostname]
+disabled = false
+ssh_only = false
+ssh_symbol = "{{ (fromToml (output "starship" "preset" "nerd-font-symbols")).hostname.ssh_symbol }}"
+
+{{ if (gt (len (env "CONTAINER_ID")) 0) -}} # is running in Distrobox?
+format = '[$ssh_symbol]($style)[distrobox](bold dimmed red) in '
+style = 'bold dimmed green'
+{{ end }}
+
+[character]
+success_symbol = '[\$](bold green)'
+error_symbol = '[\$](bold red)'
+
+[shell]
+disabled = false
+format = '[$indicator]($style)'
+style = "dimmed"
+
+[os]
+disabled = false
+style = "bold green"
+{{- /* is OS an atomic Fedora variant? */ -}}
+{{ if (lstat "/run/ostree-booted") }}
+format = '[$symbol󰝨]($style) '
+{{ end -}}
+
+[container]
+disabled = false
+format = '[\[$symbol$name\]]($style) '
+style = 'bold bg:red fg:bright-black dimmed'
+
+# Preset nerd-font-symbols START
+{{ includeTemplate "starship/preset-nerd-font-symbols.tmpl" }}
+# Preset nerd-font-symbols END
