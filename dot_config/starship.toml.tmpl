@@ -14,7 +14,7 @@ ssh_only = false
 ssh_symbol = "{{ (fromToml (output "starship" "preset" "nerd-font-symbols")).hostname.ssh_symbol }}"
 {{ if (gt (len (env "CONTAINER_ID")) 0) -}}
 # Is running in Distrobox -> hide hostname to prevent duplicate output
-format = '[$ssh_symbol]($style)[distrobox](bold dimmed red) in '
+format = '([$ssh_symbol]($style) )in '
 style = 'bold dimmed green'
 {{- end }}
 
@@ -34,14 +34,14 @@ style = "bold green"
 # Is running in atomic Fedora variant -> add "atom" symbol after OS symbol
 format = '[$symbol󰝨]($style) '
 {{ else if (gt (len (env "CONTAINER_ID")) 0) -}}
-# Is running in atomic Fedora variant -> add "play box" symbol after OS symbol
-format = '[$symbol󰐋]($style) '
+# Is running in Distrobox environment -> add "box" symbol after OS symbol
+format = '[$symbol]($style) '
 {{- end }}
 
 [container]
 disabled = false
-format = '[\[$symbol$name\]]($style) '
-style = 'bold bg:red fg:black'
+format = '[$symbol\[$name\]]($style) '
+#style = 'bold bg:red fg:black'
 
 # Preset nerd-font-symbols START
 {{ includeTemplate "starship/preset-nerd-font-symbols.tmpl" }}
