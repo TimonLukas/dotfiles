@@ -12,11 +12,11 @@ format = '[$user]($style) '
 disabled = false
 ssh_only = false
 ssh_symbol = "{{ (fromToml (output "starship" "preset" "nerd-font-symbols")).hostname.ssh_symbol }}"
-
-{{ if (gt (len (env "CONTAINER_ID")) 0) -}} # is running in Distrobox?
+{{ if (gt (len (env "CONTAINER_ID")) 0) -}}
+# Is running in Distrobox -> hide hostname to prevent duplicate output
 format = '[$ssh_symbol]($style)[distrobox](bold dimmed red) in '
 style = 'bold dimmed green'
-{{ end }}
+{{- end }}
 
 [character]
 success_symbol = '[\$](bold green)'
@@ -30,10 +30,10 @@ style = "dimmed"
 [os]
 disabled = false
 style = "bold green"
-{{- /* is OS an atomic Fedora variant? */ -}}
-{{ if (lstat "/run/ostree-booted") }}
+{{ if (lstat "/run/ostree-booted") -}}
+# Is running in atomic Fedora variant -> add "atom" symbol after OS symbol
 format = '[$symbol󰝨]($style) '
-{{ end -}}
+{{- end }}
 
 [container]
 disabled = false
