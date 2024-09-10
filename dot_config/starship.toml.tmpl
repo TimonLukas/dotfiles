@@ -33,12 +33,15 @@ style = "bold green"
 {{ if (lstat "/run/ostree-booted") -}}
 # Is running in atomic Fedora variant -> add "atom" symbol after OS symbol
 format = '[$symbol󰝨]($style) '
+{{ else if (gt (len (env "CONTAINER_ID")) 0) -}}
+# Is running in atomic Fedora variant -> add "play box" symbol after OS symbol
+format = '[$symbol󰐋]($style) '
 {{- end }}
 
 [container]
 disabled = false
 format = '[\[$symbol$name\]]($style) '
-style = 'bold bg:red fg:bright-black dimmed'
+style = 'bold bg:red fg:black'
 
 # Preset nerd-font-symbols START
 {{ includeTemplate "starship/preset-nerd-font-symbols.tmpl" }}
