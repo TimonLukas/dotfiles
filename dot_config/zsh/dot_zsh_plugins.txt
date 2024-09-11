@@ -1,0 +1,37 @@
+# Based on https://github.com/getantidote/zdotdir
+
+# Completions
+
+zsh-users/zsh-completions path:src kind:fpath
+
+mattmc3/ez-compinit
+
+
+# Regular plugins
+
+mattmc3/zman
+agkozak/zsh-z
+
+
+# Framework: zsh-utils
+
+belak/zsh-utils path:history
+belak/zsh-utils path:utility
+belak/zsh-utils path:editor
+
+
+# Deferred plugins
+
+zdharma-continuum/fast-syntax-highlighting kind:defer
+
+
+# Final plugins
+
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+
+
+# Starship prompt
+
+axieax/zsh-starship
+

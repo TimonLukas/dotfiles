@@ -3,4 +3,4 @@ packages:
     fedora:
       dnf:
         - 'zsh'
-        - 'zsh-autosuggestions'
+        #- 'zsh-autosuggestions'
